@@ -28,10 +28,18 @@ public:
     ~ChatBot();
 
     //// STUDENT CODE
-    ////
+    // copy constructor
+    ChatBot(const ChatBot &other);
 
-    ////
-    //// EOF STUDENT CODE
+    // move constructor
+    ChatBot(ChatBot &&other);
+
+    // copy assignment operator
+    ChatBot &operator=(const ChatBot &other);
+
+    // move assignment operator
+    ChatBot &operator=(ChatBot &&other);
+    //// EOF CODE
 
     // getters / setters
     void SetCurrentNode(GraphNode *node);
