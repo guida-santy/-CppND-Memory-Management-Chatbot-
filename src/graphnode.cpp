@@ -9,12 +9,7 @@ GraphNode::GraphNode(int id)
 GraphNode::~GraphNode()
 {
     //// STUDENT CODE
-    ////
-
-    delete _chatBot; 
-
-    ////
-    //// EOF STUDENT CODE
+    //// EOF CODE
 }
 
 void GraphNode::AddToken(std::string token)
