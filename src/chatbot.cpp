@@ -45,9 +45,13 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ChatBot::ChatBot(const ChatBot &other){
     std::cout << "ChatBot copy constructor" << std::endl;
-    _image     = other._image;
+    _image     = new wxBitmap(*other._image);
     _chatLogic = other._chatLogic;
     _rootNode  = other._rootNode;
+
+    //https://knowledge.udacity.com/questions/611240
+    _chatLogic->SetChatbotHandle(this);
+
 }
 
 ChatBot::ChatBot(ChatBot &&other){
@@ -60,6 +64,7 @@ ChatBot::ChatBot(ChatBot &&other){
     other._image     = nullptr ;
     other._chatLogic = nullptr ;
     other._rootNode  = nullptr ;
+    _chatLogic->SetChatbotHandle(this);
 }
 
 ChatBot& ChatBot::operator=(const ChatBot &other){
@@ -71,12 +76,19 @@ ChatBot& ChatBot::operator=(const ChatBot &other){
             delete _image;
         }
 
-        _image     = other._image;
+        // https://knowledge.udacity.com/questions/343906
+        // ... talking about _image, which is a pointer and hen it requires deep copying.
+        // The variable _image is a pointer, and we are making a copy of the object that contains it.
+        // In this case, we must make a deep copy. If we don't, we will have two objects that contain the same pointer internally
+        _image = new wxBitmap(*other._image); // Deep copying means that you need to use the new operator
+
         _chatLogic = other._chatLogic;
         _rootNode  = other._rootNode;
 
     }
 
+    //
+    _chatLogic->SetChatbotHandle(this);
     return *this;
 
 
@@ -99,7 +111,7 @@ ChatBot & ChatBot::operator=(ChatBot &&other){
         other._chatLogic = nullptr ;
         other._rootNode  = nullptr ;
     }
-
+    _chatLogic->SetChatbotHandle(this);
     return *this;
 
 
