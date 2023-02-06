@@ -12,17 +12,9 @@
 #include "chatlogic.h"
 
 
-ChatLogic::ChatLogic()
-{
-    //// STUDENT CODE
-    //// EOF CODE
-}
+ChatLogic::ChatLogic(){}
 
-ChatLogic::~ChatLogic()
-{
-    //// STUDENT CODE
-    //// EOF  CODE
-}
+ChatLogic::~ChatLogic(){}
 
 template <typename T>
 void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T &element)
@@ -132,7 +124,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             auto childNode = std::find_if(_nodes.begin(), _nodes.end(), [&childToken](std::unique_ptr<GraphNode> &node) { return node->GetID() == std::stoi(childToken->second); });
 
                             // create new edge
-                            std::unique_ptr<GraphEdge> edge(new GraphEdge(id));
+                            auto edge = std::make_unique<GraphEdge>(id);
                             edge->SetChildNode(childNode->get());
                             edge->SetParentNode(parentNode->get());
 
